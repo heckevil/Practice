@@ -1,8 +1,0 @@
-/**
- * 
- */
-
-function goBack(){
-	history.back();
-}
-
