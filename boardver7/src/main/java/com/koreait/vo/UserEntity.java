@@ -6,6 +6,15 @@ public class UserEntity {
 	private String pw;
 	private int gender;
 	private String nm;
+	private String profileImg;
+
+	public String getProfileImg() {
+		return profileImg;
+	}
+
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
+	}
 
 	public int getIuser() {
 		return iuser;

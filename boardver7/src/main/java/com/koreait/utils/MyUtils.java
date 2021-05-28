@@ -22,23 +22,29 @@ public class MyUtils {
 
 	public static int stringToint(String str, HttpServletRequest request) {
 		String strval = request.getParameter(str);
-		int val = Integer.parseInt(strval);
+		int val = parseStringToInt(strval);
 		return val;
 	}
-
-	public static UserEntity getLoginUser(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
-		HttpSession hs = req.getSession();
-		UserEntity loginuser = (UserEntity) hs.getAttribute("loginuser");
-
-		return loginuser;
+	public static int parseStringToInt(String val) {
+		try {
+			int result = Integer.parseInt(val);
+			return result;
+		} catch(Exception e) {
+			return 0;
+		}
 	}
 
-	public static int LoginUserPK(HttpServletRequest req, HttpServletResponse res)
+	public static UserEntity getLoginUser(HttpServletRequest req)
 			throws ServletException, IOException {
-		UserEntity vo = getLoginUser(req, res);
-		int pk = vo.getIuser();
-		return pk;
+		if(req == null) { return null; } 
+		HttpSession hs = req.getSession();
+		return (UserEntity) hs.getAttribute("loginUser");
+	}
+
+	public static int LoginUserPK(HttpServletRequest req)
+			throws ServletException, IOException {
+		if(req == null) { return 0; }		
+		return getLoginUser(req).getIuser();
 
 	}
 

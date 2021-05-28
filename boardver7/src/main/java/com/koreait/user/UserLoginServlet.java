@@ -32,26 +32,33 @@ public class UserLoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
+		//id,pw 정보 객체에 저장
 		String uid = request.getParameter("uid");
 		String upw = request.getParameter("upw");
 		UserEntity param = new UserEntity();
 		param.setId(uid);
-		String errmsg = null;
+		
+		//seluser 매소드로 보낸 param의 로그인 정보 유효성 검사
 		UserEntity result = UserDAO.selUser(param);
-
+		System.out.println("pk : "+result.getIuser());
+	
+		String errmsg = null;
+		
 		if (result == null) {
 			errmsg = "아이디를 확인하세요";
 		} else if (BCrypt.checkpw(upw, result.getPw())) {
 			HttpSession hs = request.getSession();
 			result.setPw(null);
-
+		
 			hs.setAttribute("loginUser", result);
-			response.sendRedirect("/board/boardlist");
-			return;
+			response.sendRedirect("/board/boardList");
+			//로그인 유저의 대한 정보를 '세션'에 넣어 준다.
+			
+			return;//필수
 		} else {
 			errmsg="비밀번호를 확인하세요";
 		}
+		
 		request.setAttribute("errmsg", errmsg);
 		doGet(request, response);
 	
