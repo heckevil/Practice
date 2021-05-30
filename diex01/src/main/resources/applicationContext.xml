@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- 의존성 주입 -->
+	<bean id="userBean" class="kr.or.connect.diex01.UserBean"></bean>
+	<bean id="e" class="kr.or.connect.diex01.Engine"></bean>
+	<bean id="c" class="kr.or.connect.diex01.Car">
+		<property name="engine" ref="e"></property>
+		<!-- Car안에 Engine을 Set하는 방법!
+		ref는 Set했던 엔진파라미터 가 들어간다. -->
+	</bean>
+</beans>
