@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="XMspeaker" class="com.spring.first.AppleSpeaker">
+		<constructor-arg value="30"></constructor-arg><!-- 기본생성자X 파라미터 입력 -->
+	</bean>
+	<bean id="mitv" class="com.spring.first.MiTv">
+		<!-- <constructor-arg ref="speaker"></constructor-arg> 생성자를 이용한 값주입 -->
+		<property name="speaker" ref="XMspeaker"></property>
+		<!-- property=> 멤버필스 speaker에게 setSpeaker("XMspeaker") apple스피커를 넣겠다. -->
+	</bean>
+
+</beans>
